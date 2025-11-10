@@ -1,0 +1,25 @@
+import requests
+import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+url = os.getenv("URL")
+token = os.getenv("TOKEN")
+
+payload = {"task_id": 4629, "reward": 500}
+
+headers = {
+    'User-Agent': "Dart/3.7 (dart:io)",
+    'Content-Type': "application/json",
+    'os-version': "13_33",
+    'lang': "pt",
+    'authorization': token,
+    'app-version': "1.0.5",
+    'platform': "Android"
+}
+
+response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+print(response.text)
