@@ -1,0 +1,37 @@
+name: Python
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "*/5 * * * *" # Executa a cada 5m
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências do Python
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Executar script Python
+        env:
+          URL: ${{ secrets.URL }}
+          TOKEN: ${{ secrets.TOKEN }}
+          USER_ID: ${{ secrets.USER_ID }}
+          USER_AGENT: ${{ secrets.USER_AGENT }}
+        run: python app.py
+        
