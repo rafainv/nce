@@ -11,7 +11,7 @@ token = os.getenv("TOKEN")
 payload = {"task_id":5153,"reward":5000}
 
 headers = {
-    'User-Agent': "Dart/3.7 (dart:io)",
+    #'User-Agent': "Dart/3.7 (dart:io)",
     'Content-Type': "application/json",
     'os-version': "13_33",
     'lang': "pt",
@@ -23,4 +23,5 @@ headers = {
 response = requests.post(url, data=json.dumps(payload), headers=headers)
 
 print(response.text)
+
 
